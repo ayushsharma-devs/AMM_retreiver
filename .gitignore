@@ -18,6 +18,6 @@ dist/
 .idea/
 .DS_Store
 Thumbs.db
-
+secrets.toml
 # --- Environment Variables (Future Proofing) ---
 .env
