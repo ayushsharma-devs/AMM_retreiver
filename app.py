@@ -3,7 +3,8 @@ import json
 from rank_bm25 import BM25Okapi
 import requests # Critical missing import
 import base64
-
+import gdown
+import os
 # Page Config
 st.set_page_config(page_title="AMM Retriever MVP", layout="wide")
 st.title("✈️ Aircraft Maintenance Manual Search")
@@ -25,9 +26,17 @@ st.success("✅ Access granted!")
 # 1. Load Data
 @st.cache_data
 def load_data():
-    # Fetching from the secret URL you set up
-    response = requests.get(st.secrets["JSON_URL"])
-    data = response.json()
+    # We download the file locally to the Streamlit server's temp storage
+    url = st.secrets["JSON_URL"]
+    output = "temp_index.json"
+    
+    # gdown handles the 'Large File' warning automatically
+    if not os.path.exists(output):
+        gdown.download(url, output, quiet=False, fuzzy=True)
+    
+    with open(output, "r") as f:
+        data = json.load(f)
+        
     corpus = [p['content'].lower().split() for p in data]
     return data, BM25Okapi(corpus)
 
