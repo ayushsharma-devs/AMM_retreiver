@@ -24,15 +24,20 @@ if pwd_input != st.secrets["ACCESS_PASSWORD"]:
 st.success("✅ Access granted!")
 
 # 1. Load Data
+
 @st.cache_data
 def load_data():
-    # We download the file locally to the Streamlit server's temp storage
-    url = st.secrets["JSON_URL"]
+    # Use the ID instead of a messy URL
+    file_id = st.secrets["JSON_ID"]
+    url = f'https://drive.google.com/uc?id={file_id}'
     output = "temp_index.json"
     
-    # gdown handles the 'Large File' warning automatically
     if not os.path.exists(output):
-        gdown.download(url, output, quiet=False, fuzzy=True)
+        # fuzzy=True helps gdown find the ID even if the URL is weird
+        path = gdown.download(url, output, quiet=False, fuzzy=True)
+        if path is None:
+            st.error("Failed to download the index. Check the File ID and Permissions.")
+            st.stop()
     
     with open(output, "r") as f:
         data = json.load(f)
