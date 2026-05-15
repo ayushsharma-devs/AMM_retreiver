@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+rank_bm25
+python-multipart
+PyMuPDF
+gdown
+python-dotenv
+aiofiles
+slowapi
+pydantic

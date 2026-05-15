@@ -3,6 +3,12 @@
 AMM_MVP_Data/
 amm_text_index.json
 
+# --- Databases ---
+*.db
+*.sqlite
+*.sqlite3
+api/audit.db
+
 # --- Python Environment ---
 __pycache__/
 *.py[cod]
@@ -12,6 +18,11 @@ venv/
 ENV/
 build/
 dist/
+*.egg-info/
+
+# --- Node / Frontend ---
+node_modules/
+.npm/
 
 # --- IDE & System ---
 .vscode/
@@ -19,5 +30,10 @@ dist/
 .DS_Store
 Thumbs.db
 secrets.toml
-# --- Environment Variables (Future Proofing) ---
+
+# --- Environment Variables & Secrets ---
 .env
+.env.local
+
+# --- Temporary / Inspection Scripts ---
+_inspect*.py

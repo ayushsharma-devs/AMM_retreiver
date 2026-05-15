@@ -1,5 +1,0 @@
-pymupdf
-streamlit
-rank_bm25
-requests
-gdown
